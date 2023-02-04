@@ -14,9 +14,11 @@ export class AppComponent {
   jsonData: any;
   textData: any;
   htmlData: any;
-  fileUploaded: any =File;
+  fileUploaded: any = File;
   worksheet: any;
-  uploadedFile(event : any) {
+  first_sheet_name :any;
+  
+  uploadedFile(event: any) {
     this.fileUploaded = event.target.files[0];
     this.readExcel();
   }
@@ -31,6 +33,7 @@ export class AppComponent {
       var bstr = arr.join('');
       var workbook = XLSX.read(bstr, { type: 'binary' });
       var first_sheet_name = workbook.SheetNames[0];
+
       this.worksheet = workbook.Sheets[first_sheet_name];
     };
     readFile.readAsArrayBuffer(this.fileUploaded);
@@ -46,8 +49,18 @@ export class AppComponent {
     this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });
     this.jsonData = JSON.stringify(this.jsonData);
     const data: Blob = new Blob([this.jsonData], { type: 'application/json' });
-    FileSaver.saveAs(data, 'JsonFile' + new Date().getTime() + '.json');
+    // FileSaver.saveAs(data, 'JsonFile' + new Date().getTime() + '.json');
+    FileSaver.saveAs(data, 'JsonFile' + 'D:/Demo.json');
   }
+
+  readAsJsonZieleinkommen() {
+    this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });
+    this.jsonData = JSON.stringify(this.jsonData);
+    const data: Blob = new Blob([this.jsonData], { type: 'application/json' });
+    // FileSaver.saveAs(data, 'JsonFile' + new Date().getTime() + '.json');
+    FileSaver.saveAs(data, 'JsonFile' + 'D:/A_AA_Json_DateienD/ZEK_G24.json');
+  }
+
   readAsHTML() {
     this.htmlData = XLSX.utils.sheet_to_html(this.worksheet);
     const data: Blob = new Blob([this.htmlData], {
