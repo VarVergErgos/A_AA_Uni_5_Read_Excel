@@ -78,16 +78,10 @@ export class AppComponent {
     this.jsonData = JSON.stringify(this.jsonData);
     const data: Blob = new Blob([this.jsonData], { type: 'application/json' });
     // FileSaver.saveAs(data, 'JsonFile' + new Date().getTime() + '.json');
-    FileSaver.saveAs(data, 'JsonFile' + 'D:/Demo.json');
+    FileSaver.saveAs(data, 'JsonFile' + new Date().getTime() + '.json');
   }
 
-  readAsJsonZieleinkommen() {
-    this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });
-    this.jsonData = JSON.stringify(this.jsonData);
-    const data: Blob = new Blob([this.jsonData], { type: 'application/json' });
-    // FileSaver.saveAs(data, 'JsonFile' + new Date().getTime() + '.json');
-    FileSaver.saveAs(data, 'JsonFile' + 'D:/A_AA_Json_DateienD/ZEK_G24.json');
-  }
+
 
   readAsHTML() {
     this.htmlData = XLSX.utils.sheet_to_html(this.worksheet);
